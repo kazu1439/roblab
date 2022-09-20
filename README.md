@@ -11,6 +11,8 @@
 
 4．buildする。
 
+5．source devel/setup.bash
+
 ライブラリを使用する場合
 include <roblab/ヘッダー名>とする。
 具体例：include <roblab/pid.h>
