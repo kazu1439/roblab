@@ -2,22 +2,14 @@
 <!-- Joyが必要な分だけJoyノードを立ち上げてください。それぞれ名前とデバイスファイルパスを正しく設定してください。 -->
     <node pkg="joy" type="joy_node" name="joy0" respawn="true" >
         <param name="dev" type="string" value="/dev/input/js2" /> <!-- デバイスファイルパスを正しく設定してください -->
-        <!-- <param name="default_trig_val" type="bool" value="true"/> -->
-        <param name="dev_ff" type="string" value="/dev/input/event9" />
-        <remap from="joy/set_feedback" to="joy0/set_feedback"/>
     </node>
 
     <node pkg="joy" type="joy_node" name="joy1" respawn="true" >
         <param name="dev" type="string" value="/dev/input/js3" /> <!-- デバイスファイルパスを正しく設定してください -->
-        <!-- <param name="default_trig_val" type="bool" value="true"/> -->
-        <!-- <param name="dev_ff" type="string" value="/dev/input/event9" /> -->
     </node>
 
     <node pkg="roblab" type="joyjoy" name="joyjoy">
         <param name="ControlCycle" type="double" value="0.02"/>
         <param name="NumberOfJoy" type="int" value="2" /> <!-- Joyの数を正しく設定してください -->
-        <!-- Joyが必要な分だけparamを設定してください。nameの添え字は0からスタートです。 -->
-        <param name="joy0" type="string" value="/dev/input/js2" /> <!-- デバイスファイルパスを正しく設定してください -->
-        <param name="joy1" type="string" value="/dev/input/js3" /> <!-- デバイスファイルパスを正しく設定してください -->
     </node>
 </launch>

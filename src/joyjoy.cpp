@@ -20,16 +20,15 @@ int main( int argc, char **argv ){
     ros::init( argc, argv, "joyjoy" );
     ros::NodeHandle nh;
     ros::NodeHandle pnh("~");
-
     pnh.getParam("ControlCycle",cycle);
     
     pnh.getParam("NumberOfJoy",length);
-    for (int i=0; i<length; i++){
-        std::string a = "joy" + std::to_string(i);
-        std::string b;
-        pnh.getParam(a, b);
-        ids.emplace_back(b);
-    }
+    // for (int i=0; i<length; i++){
+    //     std::string a = "joy" + std::to_string(i);
+    //     std::string b;
+    //     pnh.getParam(a, b);
+    //     ids.emplace_back(b);
+    // }
 
     ros::Subscriber sub_ps4 = nh.subscribe( "joy", 1, joys_Callback );
     for (int i=0; i<length; i++){
@@ -44,25 +43,33 @@ int main( int argc, char **argv ){
         }
     }
 
-    for (int i=0; i<length; i++){
-        std::vector<int> b;
-        last_buttons.emplace_back(b);
-    }
+    
 
     if(cycle>0){
         ros::Rate loop_rate(1/cycle);
         while (ros::ok()){
-            if (Message.rise.empty()){
-                Message.rise = Message.buttons;
-                Message.fall = Message.buttons;
-                Message.toggle = Message.buttons;
-                for(auto s : last_buttons){
-                    s = Message.buttons;
-                }
-            }
-            else{
-                for (int i=0; i<length; i++){
-                    if(ids[i]==Message.header.frame_id){
+            if(!Message.header.frame_id.empty()){
+                // ROS_INFO("not empty.");
+                for (int i=0; i<ids.size()+1; i++){
+                    if (i==ids.size()){
+                        if (i==length){
+                            ROS_WARN("I found more than %d joy. but you only define %d joy.",i,length);
+                            break;
+                        }
+                        // ROS_INFO("new ids.");
+                        Message.rise = Message.buttons;
+                        Message.fall = Message.buttons;
+                        Message.toggle = Message.buttons;
+                        std::vector<int> b;
+                        last_buttons.emplace_back(b);
+                        last_buttons[i] = Message.buttons;
+                        // std::string a = "joy" + std::to_string(i);
+                        // ros::Publisher pub_joy = nh.advertise<roblab::JoyJoy>(a, 1000);
+                        // Pubs.emplace_back(pub_joy);
+                        ids.emplace_back(Message.header.frame_id);
+                        break;
+                    }
+                    else if(ids[i]==Message.header.frame_id){
                         for (int j = 0;j<last_buttons[i].size();j++){
                             if(last_buttons[i][j]==0 && Message.buttons[j]==1){
                                 Message.rise[j] = 1;
@@ -82,6 +89,7 @@ int main( int argc, char **argv ){
                         }
                         last_buttons[i] = Message.buttons;
                         Pubs[i].publish(Message);
+                        break;
                     }
                 }
             }
@@ -95,18 +103,34 @@ int main( int argc, char **argv ){
 
 
 inline void joys_Callback( const sensor_msgs::Joy::ConstPtr &joy_msg ){
-    if(cycle>0){
-        Message.header = joy_msg->header;
-        Message.axes = joy_msg->axes;
-        Message.buttons = joy_msg->buttons;
-    }
-    else{
-        message.header = joy_msg->header;
-        message.axes = joy_msg->axes;
-        message.buttons = joy_msg->buttons;
-        for (int i=0; i<length; i++){
-            if(ids[i]==message.header.frame_id){
-                pubs[i].publish(message);
+    // ROS_INFO("%s",joy_msg->header.frame_id.c_str());
+    if(!joy_msg->header.frame_id.empty()){
+        // ROS_INFO("not empty.");
+        if(cycle>0){
+            Message.header = joy_msg->header;
+            Message.axes = joy_msg->axes;
+            Message.buttons = joy_msg->buttons;
+        }
+        else{
+            message.header = joy_msg->header;
+            message.axes = joy_msg->axes;
+            message.buttons = joy_msg->buttons;
+            for (int i=0;i<ids.size()+1;i++){
+                if (i==ids.size()){
+                    if (i==length){
+                        ROS_WARN("I found more than %d joy. but you only define %d joy.",i,length);
+                        break;
+                    }
+                    // std::string a = "joy" + std::to_string(i);
+                    // ros::Publisher pub_joy = nh.advertise<sensor_msgs::Joy>(a, 1000);
+                    // pubs.emplace_back(pub_joy);
+                    ids.emplace_back(message.header.frame_id);
+                    break;
+                }
+                else if(ids[i]==message.header.frame_id){
+                    pubs[i].publish(message);
+                    break;
+                }
             }
         }
     }
