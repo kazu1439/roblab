@@ -23,3 +23,6 @@ include <roblab/メッセージタイプ>とする。
 
 joyjoyプログラムの使用方法
 roblab/launch/の下にあるファイルを適宜書き換えてlaunchする。
+
+webjoyの使用方法
+launchして指定urlへアクセスする
