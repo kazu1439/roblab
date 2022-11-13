@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="./css/angle.css">
+    <title>ROS Angle</title>
+    <script src="./js/eventemitter2.js"></script>
+    <script src="./js/roslib.js"></script>
+  </head>
+
+  <body oncontextmenu='return false;' oncopy='return false;'>
+    <input type="button" id="permitOrientation" value="SafariでMotionを許可"/>
+    <input type="button" id="permitMotion" value="SafariでMotionを許可"/>
+    <script type="text/javascript" src="./js/angle.js"></script>
+    <div id="IPArea">
+    <form>
+      <label class="nonselect">IP: </label>
+      <input type="text" id="IP" size="20" />
+    </form>
+    <p class="nonselect">status: <label id="state">Disconnect</label></p>
+    </div>
+    <div id="displayArea">
+        <div class="circle"></div>
+    </div>
+  </body>
+</html>

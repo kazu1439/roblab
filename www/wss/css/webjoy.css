@@ -1,0 +1,132 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  font-size: large;
+  user-select:none;
+  -webkit-user-select:none;
+}
+html,body{
+  overflow: hidden;
+  touch-action: manipulation;
+}
+.nonselect{
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+.clossPosition {
+  width: 25%;
+  height: 40%;
+}
+.clossPosition>input {
+  width: 30%;
+  height: 30%;
+}
+.clossPosition > :nth-child(1){
+  position: absolute;
+  left: 35%;
+  top: 70%;
+}
+.clossPosition > :nth-child(2){
+  position: absolute;
+  left: 70%;
+  top: 35%;
+}
+.clossPosition > :nth-child(3){
+  position: absolute;
+  left: 35%;
+  top: 0%;
+}
+.clossPosition > :nth-child(4){
+  position: absolute;
+  left: 0%;
+  top: 35%;
+}
+
+.outsidePosition {
+  width: 25%;
+  height: 25%;
+}
+.outsidePosition > input{
+  width: 100%;
+  height: 50%;
+}
+
+.stickPosition {
+  width: 25%;
+  height: 40%;
+}
+.stickPosition > input{
+  width: 30%;
+  height: 30%;
+}
+.stickPosition > :nth-child(1){
+  position: absolute;
+  left: 35%;
+  top: 35%;
+}
+#stickLeft {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+}
+#stickRight {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+}
+
+#IPArea {
+  height: 10vh;
+  /* background-color: brown; */
+}
+#IPArea > form{
+  display: inline;
+  width: 50%;
+}
+#IPArea > p{
+  display: inline;
+  width: 50%;
+}
+#btnArea {
+  user-select: none;
+  font-size: 1vh;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 90vh;
+}
+
+#figureButtons {
+  position: absolute;
+  left: 70%;
+  top: 30%;
+}
+
+#LButtons {
+  position: absolute;
+  left:5%;
+}
+
+#RButtons {
+  position: absolute;
+  left:70%;
+}
+
+#centerButtons {
+  width: 20%;
+  height: 40%;
+  position: absolute;
+  left: 40%;
+  top: 0%;
+}
+#centerButtons > input{
+  width: 100%;
+  height: 33%;
+}
+
+#arrowButtons {
+  position: absolute;
+  left:5%;
+  top: 30%;
+}

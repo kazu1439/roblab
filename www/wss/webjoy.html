@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="./css/webjoy.css">
+    <title>ROS WEB Joy</title>
+    <script src="./js/eventemitter2.js"></script>
+    <script src="./js/roslib.js"></script>
+  </head>
+
+  <body oncontextmenu='return false;' oncopy='return false;' -webkit-touch-callout: none; -webkit-user-select:none;>
+    <script type="text/javascript" src="./js/webjoy.js"></script>
+    <div id="IPArea">
+    <form>
+      <label class="nonselect">IP: </label>
+      <input type="text" id="IP" size="20" />
+    </form>
+    <p class="nonselect">status: <label id="state">Disconnect</label></p>
+    </div>
+    <div id="btnArea">
+      <div id="figureButtons" class="clossPosition">
+      <input type="button" value="×" id='btn0'/>
+      <input type="button" value="○" id='btn1'/>
+      <input type="button" value="△" id='btn2'/>
+      <input type="button" value="□" id='btn3'/></div>
+      <div id="LButtons" class="outsidePosition">
+      <input type="button" value="L1" id='btn4'/>
+      <input type="button" value="L2" id='btn6'/></div>
+      <div id="RButtons" class="outsidePosition">
+      <input type="button" value="R1" id='btn5'/>
+      <input type="button" value="R2" id='btn7'/></div>
+      <div id="centerButtons">
+      <input type="button" value="select" id='btn8'/>
+      <input type="button" value="start" id='btn9'/>
+      <input type="button" value="pairing" id='btn10'/></div>
+      <div id="arrowButtons" class="clossPosition">
+      <input type="button" value="↓" id='btn14'/>
+      <input type="button" value="→" id='btn16'/>
+      <input type="button" value="↑" id='btn13'/>
+      <input type="button" value="←" id='btn15'/></div>
+      <div id="stickLeft" class="stickPosition">
+      <input type="button" value="L" id='btn11'/></div>
+      <div id="stickRight" class="stickPosition">
+      <input type="button" value="R" id='btn12'/></div>
+    </div>
+  </body>
+</html>
