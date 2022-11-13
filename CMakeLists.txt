@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(roblab)
 
+catkin_install_python(
+  PROGRAMS script/webserver.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
 #############################新しいmsgの作成ここから#################################
 #msg作成に必要なパッケージを探す　message_generationは必須
 find_package(catkin REQUIRED COMPONENTS
