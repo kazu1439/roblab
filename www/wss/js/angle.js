@@ -262,7 +262,7 @@ window.onload = function(){
           getAngle : function(ID){
             var angledata = new ROSLIB.Message({
               header : { frame_id : "angle"+ID },
-              orientation : {x : gamma,y : beta,z : alpha},
+              orientation : {x : gamma,y : beta,z : degrees},
               orientation_covariance : [0,0,0,0,0,0,0,0,0],
               angular_velocity : {x : 0,y : 0,z : 0},
               angular_velocity_covariance : [0,0,0,0,0,0,0,0,0],
