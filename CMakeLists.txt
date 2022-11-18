@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(roblab)
 
-catkin_install_python(
-  PROGRAMS script/webserver.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 #############################新しいmsgの作成ここから#################################
 #msg作成に必要なパッケージを探す　message_generationは必須
@@ -14,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   message_generation
 )
+catkin_python_setup()
 
 ## msgフォルダ内のカスタムメッセージファイルを追記
  add_message_files(
@@ -92,3 +90,6 @@ find_package(catkin REQUIRED COMPONENTS
 add_dependencies(joyjoy ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 #####################################################################################
 
+catkin_install_python(
+  PROGRAMS script/webserver.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
