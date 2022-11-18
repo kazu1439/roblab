@@ -278,8 +278,7 @@ class button{
                   var pub = new ROSLIB.Topic({
                     ros : this.ros,
                     name : '/idcheck',
-                    messageType : 'std_msgs/Int32',
-                    url: 'ws://' + ip + ':9090'
+                    messageType : 'std_msgs/Int32'
                   });
                   var idData = new ROSLIB.Message({data : Id});
                   setTimeout(() => {
@@ -292,8 +291,7 @@ class button{
               var pub = new ROSLIB.Topic({
                   ros : this.ros,
                   name : '/joy',
-                  messageType : 'sensor_msgs/Joy',
-                  url: 'ws://' + ip + ':9090'
+                  messageType : 'sensor_msgs/Joy'
               });
               pub.publish(msg);
           },
