@@ -14,7 +14,7 @@
   <arg name="certfile" default=""/>
   <arg name="keyfile" default=""/>
 
-  <node pkg="roswww" type="webserver.py" name="$(arg name)"
+  <node pkg="roblab" type="webserver.py" name="$(arg name)"
         args="--name $(arg name) --webpath $(arg webpath) --cached $(arg cached)
               $(arg basic_flag)
               --single_package=$(arg single_package)
