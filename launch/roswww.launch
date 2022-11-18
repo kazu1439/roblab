@@ -18,6 +18,6 @@
         args="--name $(arg name) --webpath $(arg webpath) --cached $(arg cached)
               $(arg basic_flag)
               --single_package=$(arg single_package)
-              --port $(arg port) --start_port $(arg start_port) --end_port $(arg end_port) --certfile $(arg certfile) --keyfile $(arg keyfile)">  
+              --port $(arg port) --start_port $(arg start_port) --end_port $(arg end_port) --certfile=$(arg certfile) --keyfile=$(arg keyfile)">  
   </node>
 </launch>
