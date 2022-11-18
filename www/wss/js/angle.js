@@ -236,8 +236,7 @@ window.onload = function(){
                   var pub = new ROSLIB.Topic({
                     ros : this.ros,
                     name : '/angleidcheck',
-                    messageType : 'std_msgs/Int32',
-                    url: 'wss://' + ip + ':9090'
+                    messageType : 'std_msgs/Int32'
                   });
                   var idData = new ROSLIB.Message({data : Id});
                   setTimeout(() => {
@@ -250,8 +249,7 @@ window.onload = function(){
               var pub = new ROSLIB.Topic({
                   ros : this.ros,
                   name : '/imu',
-                  messageType : 'sensor_msgs/Imu',
-                  url: 'wss://' + ip + ':9090'
+                  messageType : 'sensor_msgs/Imu'
               });
               pub.publish(msg);
           },
