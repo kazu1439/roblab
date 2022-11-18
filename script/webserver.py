@@ -35,7 +35,7 @@
 # Author: Jonathan Mace, Jihoon Lee, Isaac Isao Saito
 
 import argparse
-import roswww
+import roblab
 import rospy
 
 
@@ -68,6 +68,6 @@ def parse_argument(argv):
 if __name__ == '__main__':
     rospy.init_node("webserver", disable_signals=True)
     name, webpath, port, cached, single, basic, basic_yaml, certfile, keyfile = parse_argument(rospy.myargv()[1:])
-    webserver = roswww.ROSWWWServer(name, webpath, port, cached, single_package=single, basic=basic, basic_yaml=basic_yaml, certpath=certfile, keypath=keyfile)
+    webserver = roblab.ROSWWWServer(name, webpath, port, cached, single_package=single, basic=basic, basic_yaml=basic_yaml, certpath=certfile, keypath=keyfile)
     webserver.loginfo("Initialised")
     webserver.spin()
