@@ -26,3 +26,6 @@ roblab/launch/の下にあるファイルを適宜書き換えてlaunchする。
 
 webjoyの使用方法
 launchして指定urlへアクセスする
+
+モバイル端末の加速度取得方法
+鍵を作成してパスを設定し、launchして指定urlへアクセスする
