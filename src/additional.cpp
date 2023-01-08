@@ -12,6 +12,7 @@
 
 std::vector<std::string> topics;
 std::vector<std::string> values;
+std::vector<bool> connect_status;
 std::vector<ros::Subscriber> subs;
 float cycle = 0.02;
 
@@ -111,6 +112,9 @@ int main( int argc, char **argv ){
             pub_status.publish(msg);
 
             // ROS_INFO("")
+            for(int i = 0;i<connect_status.size();i++){
+                connect_status[i] = false;
+            }
             for (ros::master::V_TopicInfo::iterator it = master_topics.begin() ; it != master_topics.end(); it++) {
                 const ros::master::TopicInfo& info = *it;
                 // std::cout << "topic_" << it - master_topics.begin() << ": " << info.name << ": " << info.datatype << std::endl;
@@ -119,7 +123,8 @@ int main( int argc, char **argv ){
                     if(info.name=="/topic_status"){
                         continue;
                     }
-                    
+
+                    connect_status.emplace_back(true);
                     topics.emplace_back(info.name);
                     values.emplace_back("");
                     if(info.datatype=="std_msgs/Int32"){
@@ -141,6 +146,19 @@ int main( int argc, char **argv ){
                         values[topics.size()-1] = info.name+" : undefined";
                         ROS_WARN("%s[%s] is not defined.", info.datatype.c_str(), info.name.c_str());
                     }
+                }
+                else{
+                    for(int i = 0;i<topics.size();i++){
+                        if(topics[i]==info.name){
+                            connect_status[i] = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            for(int i=0;i<connect_status.size();i++){
+                if(!connect_status[i]){
+                    values[i] = topics[i]+" : died";
                 }
             }
             ros::spinOnce();
