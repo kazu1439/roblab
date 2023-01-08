@@ -78,6 +78,12 @@ add_dependencies(joyjoy ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TA
 target_link_libraries(joyjoy ${catkin_LIBRARIES})
 ##################################################################################
 
+########################additionalノードbuild関係################################
+add_executable(additional src/additional.cpp)
+add_dependencies(additional ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(additional ${catkin_LIBRARIES})
+##################################################################################
+
 
 ###########################カスタムmsg使用に必要（依存する側に記述）####################################
 find_package(catkin REQUIRED COMPONENTS

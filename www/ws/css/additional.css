@@ -1,0 +1,63 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  font-size: large;
+  user-select:none;
+  -webkit-user-select:none;
+}
+html,body{
+  overflow: hidden;
+  touch-action: manipulation;
+}
+.nonselect{
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+#IPArea {
+  height: 10vh;
+  /* background-color: brown; */
+}
+#IPArea > form{
+  display: inline;
+  width: 50%;
+}
+#IPArea > p{
+  display: inline;
+  width: 50%;
+}
+
+#contentArea{
+  position: relative;
+  height: 90vh;
+  display: flex;
+  flex-direction: row;
+}
+
+#btnArea {
+  user-select: none;
+  font-size: 1vh;
+  /* position: absolute; */
+  /* margin-left: 0; */
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  /* background-color: aqua; */
+}
+
+#btnArea > input {
+  width: 25%;
+  flex-grow: 1;
+}
+
+#textArea {
+  /* user-select: none; */
+  font-size: 3vh;
+  /* position: absolute; */
+  /* margin-left: auto; */
+  /* margin-right: 0; */
+  width: 50%;
+  height: 90vh;
+  /* background-color: rgb(70, 134, 76); */
+  white-space: pre-wrap;
+}

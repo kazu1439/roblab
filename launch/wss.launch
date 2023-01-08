@@ -11,4 +11,5 @@
   <arg name="certfile" value="/home/roblab/catkin_ws/src/roswww/src/roswww/server.crt"/>
   <arg name="keyfile" value="/home/roblab/catkin_ws/src/roswww/src/roswww/server.key"/>
   </include>
+  <include file="$(find roblab)/launch/additional.launch" />
 </launch>

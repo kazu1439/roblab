@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="roblab" type="additional" name="additional" output="screen">
+        <param name="ControlCycle" type="double" value="0.02"/> <!-- 制御周期を正しく設定してください -->
+        <param name="NumberOfJoy" type="int" value="0" /> <!-- Joyの数を正しく設定してください -->
+   </node>
+</launch>

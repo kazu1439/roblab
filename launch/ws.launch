@@ -1,4 +1,5 @@
 <launch>
   <include file="$(find roblab)/launch/roswww.launch" />
+  <include file="$(find roblab)/launch/additional.launch" />
   <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
 </launch>
