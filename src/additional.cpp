@@ -116,6 +116,10 @@ int main( int argc, char **argv ){
                 // std::cout << "topic_" << it - master_topics.begin() << ": " << info.name << ": " << info.datatype << std::endl;
                 bool found = std::find(topics.begin(), topics.end(), info.name) != topics.end();
                 if(!found){
+                    if(info.name=="/topic_status"){
+                        continue;
+                    }
+                    
                     topics.emplace_back(info.name);
                     values.emplace_back("");
                     if(info.datatype=="std_msgs/Int32"){
