@@ -11,25 +11,24 @@ ros::Subscriber sub;
 std::vector<int> last_buttons;
 
 
-inline void joys_Callback( const sensor_msgs::Joy::ConstPtr &joy_msg );
+inline void joy_Callback( const sensor_msgs::Joy::ConstPtr &joy_msg );
 
 int main( int argc, char **argv ){
     ros::init( argc, argv, "joyjoy" );
     ros::NodeHandle nh;
     ros::NodeHandle pnh("~");
 
-    pnh.getParam("JoyName", b);
-    id = b;
+    pnh.getParam("JoyName", id);
 
     sub = nh.subscribe( id, 1, joy_Callback );
-    pub = nh.advertise<roblab::JoyJoy>("joyjoy/"+id, 1000);
+    pub = nh.advertise<roblab::JoyJoy>("JoyJoy/"+id, 1000);
 
     ros::spin();
     return 0;
 }
 
 
-inline void joys_Callback( const sensor_msgs::Joy::ConstPtr &joy_msg ){
+inline void joy_Callback( const sensor_msgs::Joy::ConstPtr &joy_msg ){
     
     message.header = joy_msg->header;
     message.axes = joy_msg->axes;
