@@ -7,7 +7,7 @@
 roblab::JoyJoy message;
 std::string id;
 ros::Publisher pub;
-ros::Subscriber sub;
+// ros::Subscriber sub;
 std::vector<int> last_buttons;
 
 
@@ -20,8 +20,8 @@ int main( int argc, char **argv ){
 
     pnh.getParam("JoyName", id);
 
-    sub = nh.subscribe( id, 1, joy_Callback );
-    pub = nh.advertise<roblab::JoyJoy>("JoyJoy/"+id, 1000);
+    ros::Subscriber sub = nh.subscribe( id, 1000, joy_Callback );
+    pub = nh.advertise<roblab::JoyJoy>("joyjoy"+id, 1000);
 
     ros::spin();
     return 0;
@@ -29,10 +29,15 @@ int main( int argc, char **argv ){
 
 
 inline void joy_Callback( const sensor_msgs::Joy::ConstPtr &joy_msg ){
-    
     message.header = joy_msg->header;
     message.axes = joy_msg->axes;
     message.buttons = joy_msg->buttons;
+    if(message.rise.size()==0){
+        message.rise = joy_msg->buttons;
+        message.fall = joy_msg->buttons;
+        message.toggle = joy_msg->buttons;
+    }
+    
     for (int j = 0;j<last_buttons.size();j++){
         if(last_buttons[j]==0 && message.buttons[j]==1){
             message.rise[j] = 1;

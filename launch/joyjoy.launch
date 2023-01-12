@@ -1,11 +1,5 @@
 <launch>
-<!-- Joyが必要な分だけJoyノードを立ち上げてください。それぞれ名前とデバイスファイルパスを正しく設定してください。 -->
-    <node pkg="joy" type="joy_node" name="joy0" respawn="true" >
-        <param name="dev" type="string" value="/dev/input/js2" /> <!-- デバイスファイルパスを正しく設定してください -->
-        <remap from="/joy" to="/remaptest" />
-    </node>
-
-    <node pkg="roblab" type="joyjoy" name="joyjoy">
-        <param name="JoyName" type="string" value="/remaptest">
+    <node pkg="roblab" type="joyjoy" name="joyjoy"><!-- joy拡張ノード -->
+        <param name="JoyName" type="string" value="/joy"/><!-- 拡張したいjoyトピック名 -->
     </node>
 </launch>
