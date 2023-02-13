@@ -13,6 +13,7 @@
 std::vector<std::string> topics;
 std::vector<std::string> values;
 std::vector<bool> connect_status;
+std::vector<bool> define_status;
 std::vector<ros::Subscriber> subs;
 float cycle = 0.02;
 
@@ -74,7 +75,7 @@ void commonFloatMultiCb(const std_msgs::Float32MultiArray::ConstPtr& msg, const 
 
 void commonBoolCb(const std_msgs::Bool::ConstPtr& msg, const std::string name,const int index)
 {
-    ROS_INFO("%s : %d", name.c_str(), msg->data);
+    // ROS_INFO("%s : %d", name.c_str(), msg->data);
     values[index] = "";
     values[index] += name;
     values[index] += " : ";
@@ -101,7 +102,7 @@ int main( int argc, char **argv ){
             for(int i = 0;i<values.size();i++){
                 // ROS_INFO((topics[i]+':'+values[i]).c_str());
                 msg.data += values[i];
-                std::cout << values[i] << std::endl;
+                // std::cout << values[i] << std::endl;
                 if(i==values.size()-1){
                     break;
                 }
@@ -125,6 +126,7 @@ int main( int argc, char **argv ){
                     }
 
                     connect_status.emplace_back(true);
+                    define_status.emplace_back(true);
                     topics.emplace_back(info.name);
                     values.emplace_back("");
                     if(info.datatype=="std_msgs/Int32"){
@@ -143,8 +145,9 @@ int main( int argc, char **argv ){
                         subs.emplace_back(nh.subscribe<std_msgs::Bool>(info.name,1,boost::bind(commonBoolCb, _1, info.name,topics.size()-1)));
                     }
                     else{
+                        define_status[topics.size()-1] = false;
                         values[topics.size()-1] = info.name+" : undefined";
-                        ROS_WARN("%s[%s] is not defined.", info.datatype.c_str(), info.name.c_str());
+                        ROS_WARN("topic name [%s]'s data type is undefined.", info.name.c_str());
                     }
                 }
                 else{
@@ -156,9 +159,14 @@ int main( int argc, char **argv ){
                     }
                 }
             }
+
             for(int i=0;i<connect_status.size();i++){
                 if(!connect_status[i]){
                     values[i] = topics[i]+" : died";
+                }
+                else if(!define_status[i]){
+                    values[i] = topics[i]+" : undefined";
+                    ROS_WARN("topic name [%s]'s data type is undefined.", topics[i].c_str());
                 }
             }
             ros::spinOnce();

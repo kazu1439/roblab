@@ -1,0 +1,3 @@
+<launch>
+  <node pkg="roblab" type="publisher" name="publisher"></node>
+</launch>

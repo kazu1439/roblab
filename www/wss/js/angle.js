@@ -258,6 +258,7 @@ window.onload = function(){
             return document.getElementById("IP").value;
           },
           getAngle : function(ID){
+            document.getElementById('angle').innerHTML = ""+parseInt(degrees)+"°";
             var angledata = new ROSLIB.Message({
               header : { frame_id : "angle"+ID },
               orientation : {x : gamma,y : beta,z : degrees},

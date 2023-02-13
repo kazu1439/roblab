@@ -1,0 +1,8 @@
+<launch>
+  <include file="$(find roblab)/launch/roswww.launch" />
+  <include file="$(find roblab)/launch/additional.launch" />
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
+  <node pkg="roblab" type="joyjoy" name="joyjoy"><!-- joy拡張ノード -->
+      <param name="JoyName" type="string" value="/joy"/><!-- 拡張したいjoyトピック名 -->
+  </node>
+</launch>

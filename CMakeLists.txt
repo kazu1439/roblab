@@ -17,6 +17,7 @@ catkin_python_setup()
  add_message_files(
    FILES
    JoyJoy.msg
+   LRF_info.msg
  )
 
 ## msg作成に必要な依存関係を記述
@@ -27,22 +28,22 @@ catkin_python_setup()
  )
 
 ##他のパッケージがこのパッケージを依存したときに依存に加わる必要があるパッケージを追加
-catkin_package(
-  CATKIN_DEPENDS roscpp rospy std_msgs sensor_msgs
-)
+#catkin_package(
+#  CATKIN_DEPENDS roscpp rospy std_msgs sensor_msgs message_runtime
+#)
 
 #############################新しいmsgの作成ここまで#################################
 
 #############################ライブラリの作成ここから###########################################
 
 #必要なパッケージを探す
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
-  std_msgs
-  sensor_msgs
-  message_generation
-)
+#find_package(catkin REQUIRED COMPONENTS
+#  roscpp
+#  rospy
+#  std_msgs
+#  sensor_msgs
+#)
+
 
 #ヘッダーファイルの場所を指定ここではincludeを表す。
 include_directories(
@@ -54,7 +55,7 @@ include_directories(
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES roblab
-  CATKIN_DEPENDS roscpp rospy std_msgs sensor_msgs
+  CATKIN_DEPENDS message_runtime roscpp rospy std_msgs sensor_msgs
 )
 
 ## ライブラリを追加
@@ -66,6 +67,8 @@ catkin_package(
    src/lib/pid.cpp
    src/lib/trapezoid_control.cpp
    src/lib/timer.cpp
+   src/lib/ros_clock_timer.cpp
+   src/lib/cycle_count_timer.cpp
  )
  target_link_libraries(roblab ${catkin_LIBRARIES})
 
@@ -84,16 +87,23 @@ add_dependencies(additional ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTE
 target_link_libraries(additional ${catkin_LIBRARIES})
 ##################################################################################
 
+###########################テスト用###########################
+add_executable(publisher src/publisher.cpp)
+target_link_libraries(publisher ${catkin_LIBRARIES})
+add_executable(subscriber src/subscriber.cpp)
+target_link_libraries(subscriber ${catkin_LIBRARIES})
+#################################################################################
+
 
 ###########################カスタムmsg使用に必要（依存する側に記述）####################################
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
-  std_msgs
-  sensor_msgs
+#find_package(catkin REQUIRED COMPONENTS
+#  roscpp
+#  rospy
+#  std_msgs
+#  sensor_msgs
 #  roblab
-)
-add_dependencies(joyjoy ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+#)
+#add_dependencies(joyjoy ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 #####################################################################################
 
 catkin_install_python(
